@@ -69,7 +69,7 @@ def main():
     setup_logging(level=log_level, log_file=args.log_file)
     
     logger = logging.getLogger(__name__)
-    logger.info(f"Starting OEM Finder CLI with query: {args.query}")
+    logger.info(f"Starting Origyn CLI with query: {args.query}")
     
     try:
         # Validate configuration
@@ -111,7 +111,7 @@ def main():
         return 0
     
     except Exception as e:
-        logger.error(f"Error in OEM Finder: {str(e)}", exc_info=True)
+        logger.error(f"Error in Origyn: {str(e)}", exc_info=True)
         
         if args.json:
             error_result = {

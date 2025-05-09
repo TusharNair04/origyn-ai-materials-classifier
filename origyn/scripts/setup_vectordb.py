@@ -20,7 +20,7 @@ from sentence_transformers import SentenceTransformer
 
 # Add parent directory to path to import module
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from oem_finder.utils.logging_utils import setup_logging
+from origyn.utils.logging_utils import setup_logging
 
 
 def parse_args():
@@ -76,10 +76,10 @@ def load_unspsc_codes(csv_path: str) -> List[Dict]:
     logging.info(f"Loading UNSPSC codes from {csv_path}")
     
     try:
-        df = pd.read_csv(csv_path)
+        df = pd.read_csv(csv_path, dtype = str)
         
         # Check required columns
-        required_columns = ["family", "family_title", "description"]
+        required_columns = ["key","segment", "segment_title", "family", "family_title", "class", "class_title", "commodity", "commodity_title"]
         missing_columns = [col for col in required_columns if col not in df.columns]
         
         if missing_columns:
@@ -163,7 +163,7 @@ def create_vectordb(
             metadatas.append(metadata)
         
         # Generate embeddings in batches
-        batch_size = 100
+        batch_size = 166
         for i in range(0, len(documents), batch_size):
             batch_ids = ids[i:i+batch_size]
             batch_docs = documents[i:i+batch_size]
@@ -218,7 +218,7 @@ def main():
         
         results = collection.query(
             query_embeddings=[query_embedding],
-            n_results=3,
+            n_results=5,
             include=["documents", "metadatas", "distances"]
         )
         
