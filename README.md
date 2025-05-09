@@ -64,9 +64,15 @@ The script performs the following operations:
 
 The CSV file should contain at minimum the following columns:
 
-- `family`: The UNSPSC family code
-- `family_title`: The title of the UNSPSC family
-- `description`: A description of the code (optional)
+- **key**: unique identifier for each entry
+- **segment**: segment code
+- **segment_title**: segment name
+- **family**: family code
+- **family_title**: family name
+- **class**: class code
+- **class_title**: class name
+- **commodity**: commodity code
+- **commodity_title**: commodity name
 
 ## Usage
 
